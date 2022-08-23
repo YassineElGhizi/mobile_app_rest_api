@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->integer('type')->default(0);
             $table->string('images', 10000)->default('[]');
             $table->unsignedBigInteger('city_id');
+            $table->unsignedBigInteger('etablissement_id');
             $table->unsignedBigInteger('module_id');
             $table->unsignedBigInteger('user_id');
             $table->bigInteger('search_count')->default(0);

@@ -15,10 +15,10 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        return Document::query()->with('user:id,name,image')
+        return Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name'])
             ->where('status', '=', 1)
             ->where('type', '=', 1)
-            ->select('id', 'images', 'name', 'description', 'user_id')
+            ->select('id', 'images', 'name', 'description', 'user_id', 'city_id', 'etablissement_id')
             ->limit(10)
             ->get();
     }
