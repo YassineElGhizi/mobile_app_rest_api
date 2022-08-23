@@ -28,7 +28,7 @@ class DocumentController extends Controller
         return Document::query()->with('user:id,name,image')
             ->where('status', '=', 1)
             ->where('type', '=', 0)
-            ->select('id', 'images', 'name', 'description', 'user_id')
+            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state')
             ->limit(10)
             ->get();
     }
