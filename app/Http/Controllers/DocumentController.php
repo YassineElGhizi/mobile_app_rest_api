@@ -15,22 +15,31 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        return Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name'])
+        $data = Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name'])
             ->where('status', '=', 1)
             ->where('type', '=', 1)
             ->select('id', 'images', 'name', 'description', 'user_id', 'city_id', 'etablissement_id')
             ->limit(10)
             ->get();
+
+        return response()->json(
+            ["documents" => $data]
+        );
     }
 
     public function get_books()
     {
-        return Document::query()->with('user:id,name,image')
+        $data = Document::query()->with('user:id,name,image')
             ->where('status', '=', 1)
             ->where('type', '=', 0)
             ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state')
             ->limit(10)
             ->get();
+
+        return response()->json(
+            ["books" => $data]
+        );
+
     }
 
 
