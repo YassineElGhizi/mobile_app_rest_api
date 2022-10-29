@@ -34,10 +34,12 @@ Route::middleware('auth:sanctum')->get('/salim', function () {
 
 Route::prefix('document')->group(function () {
     Route::resource('/', DocumentController::class);
+    Route::get('/search/{keyword}', [DocumentController::class , 'search_documents']);
 });
 
 Route::prefix('books')->group(function () {
     Route::get('/', [DocumentController::class , 'get_books']);
+    Route::get('/search/{keyword}', [DocumentController::class , 'search_books']);
 });
 
 

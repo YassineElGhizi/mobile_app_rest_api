@@ -18,7 +18,7 @@ class DocumentController extends Controller
         $data = Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name'])
             ->where('status', '=', 1)
             ->where('type', '=', 1)
-            ->select('id', 'images', 'name', 'description', 'user_id', 'city_id', 'etablissement_id')
+            ->select('id', 'images', 'name', 'description', 'user_id', 'city_id', 'etablissement_id', 'module_id')
             ->paginate(6);
 
         return response()->json($data);
@@ -33,6 +33,34 @@ class DocumentController extends Controller
             ->paginate(6);
 
         return response()->json($data);
+    }
+
+    public function search_documents($keyword)
+    {
+        return Document::query()->with('user:id,name,image')
+            ->where('status', '=', 1)
+            ->where('type', '=', 1)
+            ->where(function ($query) use ($keyword) {
+                $query->where('name', 'Like', '%' . $keyword . '%')
+                    ->orWhere('description', 'Like', '%' . $keyword . '%')
+                    ->orWhere('prof', 'Like', '%' . $keyword . '%');
+            })
+            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state')
+            ->paginate(6);
+    }
+
+    public function search_books($keyword)
+    {
+        return Document::query()->with('user:id,name,image')
+            ->where('status', '=', 1)
+            ->where('type', '=', 0)
+            ->where(function ($query) use ($keyword) {
+                $query->where('name', 'Like', '%' . $keyword . '%')
+                    ->orWhere('description', 'Like', '%' . $keyword . '%')
+                    ->orWhere('prof', 'Like', '%' . $keyword . '%');
+            })
+            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state')
+            ->paginate(6);
     }
 
 
