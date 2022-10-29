@@ -19,12 +19,9 @@ class DocumentController extends Controller
             ->where('status', '=', 1)
             ->where('type', '=', 1)
             ->select('id', 'images', 'name', 'description', 'user_id', 'city_id', 'etablissement_id')
-            ->limit(10)
-            ->get();
+            ->paginate(6);
 
-        return response()->json(
-            ["documents" => $data]
-        );
+        return response()->json($data);
     }
 
     public function get_books()
@@ -33,13 +30,9 @@ class DocumentController extends Controller
             ->where('status', '=', 1)
             ->where('type', '=', 0)
             ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state')
-            ->limit(10)
-            ->get();
+            ->paginate(6);
 
-        return response()->json(
-            ["books" => $data]
-        );
-
+        return response()->json($data);
     }
 
 
