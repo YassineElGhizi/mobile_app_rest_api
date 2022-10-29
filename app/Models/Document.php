@@ -39,4 +39,10 @@ class Document extends Model
     {
         return $this->belongsTo(Etablissement::class);
     }
+
+    public function module(){
+        return $this->belongsTo(Module::class);
+    }
+
+
 }

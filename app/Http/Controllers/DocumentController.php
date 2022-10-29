@@ -15,7 +15,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        return Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name'])
+        return Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name' , 'module:id,name'])
             ->where('status', '=', 1)
             ->where('type', '=', 1)
             ->select('id', 'images', 'name', 'description', 'user_id', 'city_id', 'etablissement_id', 'module_id' , 'prof')
@@ -34,7 +34,7 @@ class DocumentController extends Controller
 
     public function search_documents($keyword)
     {
-        return Document::query()->with('user:id,name,image')
+        return Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name' , 'module:id,name'])
             ->where('status', '=', 1)
             ->where('type', '=', 1)
             ->where(function ($query) use ($keyword) {
