@@ -15,24 +15,21 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $data = Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name'])
+        return Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name'])
             ->where('status', '=', 1)
             ->where('type', '=', 1)
             ->select('id', 'images', 'name', 'description', 'user_id', 'city_id', 'etablissement_id', 'module_id')
             ->paginate(6);
 
-        return response()->json($data);
     }
 
     public function get_books()
     {
-        $data = Document::query()->with('user:id,name,image')
+        return Document::query()->with('user:id,name,image')
             ->where('status', '=', 1)
             ->where('type', '=', 0)
-            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state')
+            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state', 'prof')
             ->paginate(6);
-
-        return response()->json($data);
     }
 
     public function search_documents($keyword)
@@ -45,7 +42,7 @@ class DocumentController extends Controller
                     ->orWhere('description', 'Like', '%' . $keyword . '%')
                     ->orWhere('prof', 'Like', '%' . $keyword . '%');
             })
-            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state')
+            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state', 'prof')
             ->paginate(6);
     }
 
@@ -59,7 +56,7 @@ class DocumentController extends Controller
                     ->orWhere('description', 'Like', '%' . $keyword . '%')
                     ->orWhere('prof', 'Like', '%' . $keyword . '%');
             })
-            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state')
+            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state', 'prof')
             ->paginate(6);
     }
 
