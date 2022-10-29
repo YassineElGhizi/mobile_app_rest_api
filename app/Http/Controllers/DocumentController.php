@@ -18,7 +18,7 @@ class DocumentController extends Controller
         return Document::query()->with(['user:id,name,image', 'city:id,name', 'etablissement:id,name'])
             ->where('status', '=', 1)
             ->where('type', '=', 1)
-            ->select('id', 'images', 'name', 'description', 'user_id', 'city_id', 'etablissement_id', 'module_id')
+            ->select('id', 'images', 'name', 'description', 'user_id', 'city_id', 'etablissement_id', 'module_id' , 'prof')
             ->paginate(6);
 
     }
