@@ -42,7 +42,7 @@ class DocumentController extends Controller
                     ->orWhere('description', 'Like', '%' . $keyword . '%')
                     ->orWhere('prof', 'Like', '%' . $keyword . '%');
             })
-            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state', 'prof')
+            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state', 'prof' , 'module_id')
             ->paginate(6);
     }
 
@@ -56,7 +56,7 @@ class DocumentController extends Controller
                     ->orWhere('description', 'Like', '%' . $keyword . '%')
                     ->orWhere('prof', 'Like', '%' . $keyword . '%');
             })
-            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state', 'prof')
+            ->select('id', 'images', 'name', 'description', 'user_id', 'price', 'state', 'prof' , 'module_id')
             ->paginate(6);
     }
 
